@@ -65,7 +65,36 @@ The database is pre-loaded with the following users.
 > **Note:** `adama_engineers` belongs to **two groups** (`Engineers` and `Pilots`). Use this user to test multi-group permissions.
 
 ---
+## 📊 Dataiku DSS Configuration Guide
 
+To connect your local Dataiku instance to this LDAP container, go to **Administration > Security > LDAP** and use the following settings.
+
+### 1. Connection Settings
+| Field in Dataiku | Value to Enter |
+| :--- | :--- |
+| **LDAP server URL** | `ldap://localhost:389/dc=galactica,dc=local` |
+| **Bind DN** | `cn=admin,dc=galactica,dc=local` |
+| **Bind password** | `admin` |
+| **Trust all certificates** | ✅ Checked |
+
+### 2. Users Mapping
+| Field in Dataiku | Value to Enter |
+| :--- | :--- |
+| **User filter by username** | `(&(objectClass=inetOrgPerson)(uid={USERNAME}))` |
+| **Display name attribute** | `cn` |
+| **Email attribute** | `mail` |
+
+### 3. Group Support
+| Field in Dataiku | Value to Enter |
+| :--- | :--- |
+| **Enable group support** | ✅ Checked |
+| **Group filter by username** | `(&(objectClass=posixGroup)(memberUid={USERNAME}))` |
+| **Group name attribute** | `cn` |
+
+### ✅ How to Verify
+1. Click **Test Connection**: Should be <span style="color:green">**OK**</span>.
+2. In **Username to test**, enter: `tyrol_engineers`
+3. Click **Test a Username**: Should be <span style="color:green">**OK**</span> and show the user details.
 ## 🛠 Project Structure
 
 * `Dockerfile`: Defines the custom image based on `osixia/openldap`.
