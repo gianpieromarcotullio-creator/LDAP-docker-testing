@@ -29,7 +29,6 @@ It is designed to be "plug-and-play": spin it up, and you immediately have a fun
 3.  **Access the services:**
     * **LDAP Server:** `localhost:389`
     * **Admin UI (phpLDAPadmin):** [https://localhost:6443](https://localhost:6443)
-        * *Note: Accept the self-signed certificate warning in your browser.*
 
 ---
 
